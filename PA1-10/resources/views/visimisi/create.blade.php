@@ -29,6 +29,3 @@ Form Visi Misi
 </script>
 @endsection
 
-@section('scripts')
-
-@endsection

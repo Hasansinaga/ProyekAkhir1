@@ -40,16 +40,16 @@
                 @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <label>Telepon</label></br>
-                <input type="text" name="mobile" id="mobile" class="form-control"></br>
-                @error('mobile')
+                <label>Email</label></br>
+                <input type="text" name="email" id="email" class="form-control"></br>
+                @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <input class="form-control" name="image" type="file" id="image">
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-
+                <br>
                 <input type="submit" value="Save" class="btn btn-success"></br>
             </form>
 

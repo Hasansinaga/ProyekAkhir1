@@ -15,7 +15,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <label>Misi</label><br>
-                <textarea name="misi" id="summernote" class="form-control" cols="30" rows="10"> {{ $visimisi->misi ?? ''}}</textarea>
+                <textarea name="misi" id="editor" class="form-control" cols="30" rows="10"> {{ $visimisi->misi ?? '' }}</textarea>
                 @error('misi')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -24,17 +24,12 @@
             </form>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-
-<script>
-  $(document).ready(function() {
-    $('#summernote').summernote({
-      placeholder: 'Masukkan Deskripsi',
-      tabsize: 2,
-      height: 200
-    });
-  });
-</script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection

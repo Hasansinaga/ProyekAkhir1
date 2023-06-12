@@ -3,6 +3,7 @@
 
 <head>
     <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -15,7 +16,7 @@
         }
 
         .container {
-            width: 400px;
+            max-width: 400px;
             padding: 20px;
             background-color: #fff;
             border-radius: 5px;
@@ -112,5 +113,4 @@
         <p>Belum memiliki akun? <a href="{{url('masyarakat/register')}}">Daftar disini</a></p>
     </div>
 </body>
-
 </html>

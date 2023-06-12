@@ -1,7 +1,6 @@
 @extends('masyarakat.master')
 
 @section('content')
-
 <div class="container-fluid bg-primary mb-5">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
         <h3 class="display-3 font-weight-bold text-white">Surat Pengantar KTP</h3>
@@ -36,7 +35,7 @@
                 <td>{{ $item->name }}</td>
                 <td>
                     @if ($item->status == 1)
-                        <a href=" " ><i class="fas fa-print">Cetak</i></a>
+                        <a href="{{url('masyarakat/cetakSurat', ['id' => $item->id])}}" target="_blank"><i class="fas fa-print">Cetak</i></a>
                     @else
                         -
                     @endif
@@ -56,7 +55,6 @@
         </ul>
     </div>
 </div>
-
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-XXXXX" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-XXXXX" crossorigin="anonymous"></script>

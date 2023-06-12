@@ -30,6 +30,17 @@ class PengumumanController extends Controller
      */
     public function store(Request $request)
     {
+        $alert = [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|min:30|max:400',
+        ];
+        $message = [
+            'title.required' => 'Kolom Judul Harus Di Isi',
+            'description.required' => 'Isi Pengumuman Harus Di Isi',
+            'description.min' => 'Isi Pengumuman minimal 30 karakter',
+            'description.max' => 'Isi Pengumuman tidak boleh lebih dari 400 karakter'
+        ];
+        $this->validate($request, $alert, $message);
         $request -> validate([
             'title' => 'required',
             'description' => 'required'

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('jabatan');
             $table->string('address',200);
             $table->string('image',300);
-            $table->string('mobile',20);
+            $table->string('email');
             $table->timestamps();
         });
     }

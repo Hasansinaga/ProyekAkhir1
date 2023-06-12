@@ -17,9 +17,9 @@
                     <br>
                     <img src="{{ asset('images/structure/'.$item->image) }}" class="card-img-top" alt="..." height="150px">
                     <div class="card-body">
-                        <p class="card-title">Nama      : {{ $item->name }}</h1> <br>
-                        <p class="card-text"> Alamat    :{{ $item->address }}</p>
-                        <p class="card-text"> No Telepon:{{ $item->mobile }}</p>
+                        <p class="card-text mt-1">Nama      : {{ $item->name }}</h1> <br>
+                        <p class="card-text mt-1"> Alamat    :{{ $item->address }}</p>
+                        <p class="card-text mt-1"> Email     :{{ $item->email }}</p>
                         <form action="{{ route('structure.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('delete')

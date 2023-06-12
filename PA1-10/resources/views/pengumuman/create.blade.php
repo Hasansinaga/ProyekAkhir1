@@ -16,7 +16,8 @@
                 @enderror
                 <label>Isi</label></br>
                 <textarea name="description" id="editor" class="form-control" cols="30" rows="10"></textarea>
-                @error('isi')
+                <br>
+                @error('description')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <input type="submit" value="Save" class="btn btn-success"></br>

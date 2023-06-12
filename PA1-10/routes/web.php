@@ -110,9 +110,17 @@ Route::prefix('masyarakat')->namespace('App\Http\Controllers')->group(function (
 
     Route::post('saran',[FronController::class, 'saranStore'])->name('saranStore');
 
+    Route::delete('saran/{id}', [FronController::class, 'saranDelete'])->name('saranDelete');
+
+    Route::get('saran/{id}', [FronController::class, 'saranEdite'])->name('saranEdite');
+
+    Route::post('saran/{id}',[FronController::class, 'saranUpdate'])->name('saranUpdate');
+
     Route::get('surat/all', [FronController::class, 'surat'])->name('surat.all');
 
     Route::get('surat/index', [FronController::class, 'suratIndex'])->name('suratIndex');
+
+    Route::get('cetakSurat/{id}', [FronController::class, 'cetak'])->name('cetak');
 
     Route::post('surat/simpan',[FronController::class, 'suratStore'])->name('suratStore');
 

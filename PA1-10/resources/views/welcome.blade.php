@@ -30,8 +30,8 @@
                                 <img class="card-img-top" src="{{ asset('images/berita/' . $item->image) }}" alt=""
                                     style="object-fit: cover; height: 200px;">
                                 <div class="card-body bg-light p-4">
-                                    <h6 class="card-title">{{ $item->judul }}</h6>
-                                    <p class="card-text">{!! Str::limit($item->isi, 70) !!}</p>
+                                    <h6 class="card-title">{!! Str::limit($item->judul, 60) !!}</h6>
+                                    <p class="card-text">{!! Str::limit($item->isi, 100) !!}</p>
                                     <p class="card-text" style="font-size: 12px; color: #555;">{{ $item->created_at }}</p>
                                     <a href="{{ route('beritadetail', $item->id) }}" class="btn btn-primary">
                                         <i class="fas fa-eye"></i> Baca Selengkapnya

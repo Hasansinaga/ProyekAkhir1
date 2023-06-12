@@ -30,6 +30,16 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
+        $alert = [
+            'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpg,png,jpeg',
+        ];
+        $message = [
+            'name.required' => 'Kolom Nama Harus Di Isi',
+            'image.required' => 'Image Harus Di Isi',
+            'image.mimes' => 'Harus Berupa JPG,PNG,JPEG',
+        ];
+        $this->validate($request, $alert, $message);
         $file = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images/galery'),$file);
 

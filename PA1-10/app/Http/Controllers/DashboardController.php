@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
         public function saran()
         {
-            $saran = Saran::get();
+            $saran = Saran::orderBy('created_at','desc')->get();
             return view('saran.index', compact('saran'));
         }
         public function surat()

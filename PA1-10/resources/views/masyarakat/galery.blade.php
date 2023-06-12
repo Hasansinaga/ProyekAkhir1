@@ -27,11 +27,26 @@
                                     </a>
                                 </div>
                             </div>
-                            <p class="text-center">{{ $item->name }}<p>
+                            <h6 class="text-center">{{ $item->name }}<h6>
                         </div>
                     </div>
                 @endforeach
             </div>
+        </div>
+        <div class="text-right">
+            <ul class="pagination">
+                @if ($galeri->previousPageUrl())
+                    <li class="page-item">
+                        <a href="{{ $galeri->previousPageUrl() }}" class="page-link">Previous</a>
+                    </li>
+                @endif
+
+                @if ($galeri->nextPageUrl())
+                    <li class="page-item">
+                        <a href="{{ $galeri->nextPageUrl() }}" class="page-link">Next</a>
+                    </li>
+                @endif
+            </ul>
         </div>
     </div>
     <br>

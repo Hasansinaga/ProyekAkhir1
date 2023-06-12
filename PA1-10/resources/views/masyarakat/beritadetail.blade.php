@@ -25,7 +25,7 @@
                             <a href="{{ route('beritadetail', $category->id) }}"><img src="{{ asset('images/berita/' . $category->image) }}" alt="img" class="fh5co_most_trading zoom-img" style="width: 100%; height: 60px; object-fit: cover;"></a>
                         </div>
                         <div class="col-7 paddding">
-                            <a href="{{ route('beritadetail', $category->id) }}" class="card-link"><div class="most_fh5co_treding_font" style="font-size: 14px;">{{ $category->judul}}</div></a>
+                            <a href="{{ route('beritadetail', $category->id) }}" class="card-link"><div class="most_fh5co_treding_font" style="font-size: 14px;">{!! Str::limit($category->judul, 50) !!}</div></a>
                             <div class="most_fh5co_treding_font_123" style="font-size: 12px;">{{$category->created_at->locale('id')->format('d F Y')}}</div>
                         </div>
                     </div>

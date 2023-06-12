@@ -24,7 +24,7 @@
                             <div class="text-left">
                                 <p><strong>Nama:</strong> {{ $item->name }}</p>
                                 <p><strong>Alamat:</strong> {{$item->address}}</p>
-                                <p><strong>Nomor Telepon:</strong> {{$item->mobile}}</p>
+                                <p><strong>Email:</strong> {{$item->email}}</p>
                             </div>
                         </div>
                     </div>

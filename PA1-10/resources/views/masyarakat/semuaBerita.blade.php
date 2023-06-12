@@ -41,7 +41,7 @@
                             <div class="col-md-2">
                                 <div class="card-image-container">
                                     <img src="{{ asset('images/berita/' . $item->image) }}" class="card-img img-fluid"
-                                        alt="Berita Image" height="200px">
+                                        alt="Berita Image" height="150px">
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -59,6 +59,21 @@
                     </div>
                 @endforeach
             </div>
+        </div>
+        <div class="text-left">
+            <ul class="pagination">
+                @if ($news->previousPageUrl())
+                    <li class="page-item">
+                        <a href="{{ $news->previousPageUrl() }}" class="page-link">Previous</a>
+                    </li>
+                @endif
+
+                @if ($news->nextPageUrl())
+                    <li class="page-item">
+                        <a href="{{ $news->nextPageUrl() }}" class="page-link">Next</a>
+                    </li>
+                @endif
+            </ul>
         </div>
     </div>
     <style>

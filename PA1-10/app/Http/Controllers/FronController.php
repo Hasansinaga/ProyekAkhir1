@@ -10,6 +10,7 @@ use App\Models\Structure;
 use App\Models\Surat;
 use App\Models\Visimisi;
 use Illuminate\Http\Request;
+use PDF;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +31,7 @@ class FronController extends Controller
     public function galeri()
     {
         $galeri = Galery::orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(9);
         return view('masyarakat.galery', compact('galeri'));
     }
     public function structure()
@@ -46,7 +47,7 @@ class FronController extends Controller
     public function pengumuman()
     {
         $pengumuman = Pengumuman::orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(6);
         return view('masyarakat.pengumuman', compact('pengumuman'));
     }
 
@@ -59,7 +60,7 @@ class FronController extends Controller
 
     public function semuaBerita()
     {
-        $news = News::orderBy('created_at', 'desc')->get();
+        $news = News::orderBy('created_at', 'desc')->paginate(10);
         return view('masyarakat.semuaBerita', ['news' => $news]);
     }
 
@@ -74,13 +75,22 @@ class FronController extends Controller
 
     public function saran()
     {
-        $saran = Saran::get();
-
+        $masyarakat = Auth::guard('masyarakat')->id();
+        $saran = Saran::where('masyarakat_id', $masyarakat)->get();
         return view('masyarakat.saran', compact('saran'));
     }
 
     public function saranStore(Request $request)
     {
+        $alert = [
+            'saran' => 'required|max:400|min:30',
+        ];
+        $message = [
+            'saran.required' => 'Silahkan isi saran Anda Terlebih Dahulu',
+            'saran.max' => 'Saran Tidak boleh lebih dari 400 karakter',
+            'saran.min' => 'Saran Tidak boleh kurang Dari 30 Karakter'
+        ];
+        $this->validate($request, $alert, $message);
         $validatedData = $request->validate([
             'saran' => 'required',
             'masyarakat_id' => 'required',
@@ -92,6 +102,32 @@ class FronController extends Controller
         $saran->save();
 
         return redirect()->back()->with('message', 'Saran sudah Terkirim');
+    }
+
+    public function saranUpdate(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'saran' => 'required',
+            'masyarakat_id' => 'required',
+        ]);
+
+        $saran = Saran::find($id);
+        $saran->saran = $validatedData['saran'];
+        $saran->masyarakat_id = $validatedData['masyarakat_id'];
+        $saran->update();
+
+        return redirect('masyarakat/saran');
+    }
+
+    public function saranEdite($id)
+    {
+        $saran = Saran::find($id);
+        return view('masyarakat.saranEdite', compact('saran'));
+    }
+    public function saranDelete($id)
+    {
+        $saran = Saran::find($id)->delete();
+        return redirect()->back();
     }
 
     public function surat()
@@ -109,6 +145,28 @@ class FronController extends Controller
 
     public function suratStore(Request $request)
     {
+        $alert = [
+            'kk' => 'required|mimes:pdf',
+            'name' => 'required',
+            'tempatlahir' => 'required',
+            'tgllahir' => 'required',
+            'jeniskelamin' => 'required',
+            'pekerjaan' => 'required',
+            'agama' => 'required',
+            'alamat' => 'required',
+        ];
+        $message = [
+            'kk.required' => 'Silahkan Upload file KK anda',
+            'kk.mimes' => 'File KK harus berupa PDF',
+            'name.required'=> 'Silahkan Isi kolom nama',
+            'tempatlahir.required' => 'Silahkan Isi kolom Tempat Lahir',
+            'tgllahir.required' => 'Silahkan Isi kolom Tanggal Lahir',
+            'jeniskelamin.required' => 'Silahkan Isi kolom Jenis Kelamin',
+            'pekerjaan.required' => 'Silahkan Isi kolom Pekerjaan',
+            'agama.required' => 'Silahkan Isi kolom Agama',
+            'alamat.required' => 'Silahkan Isi kolom Alamat',
+        ];
+        $this->validate($request, $alert, $message);
         $validatedData = $request->validate([
             'kk' => 'required|mimes:pdf',
             'name' => 'required',
@@ -137,4 +195,18 @@ class FronController extends Controller
 
         return redirect()->route('suratIndex')->with('flash_message', 'Surat Ditambah!');
     }
+
+    function cetak($id)
+    {
+        $data = Surat::find($id);
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Surat tidak ditemukan');
+        }
+
+        $pdf = PDF::loadView('masyarakat.surat-pdf', compact('data'));
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream('surat.pdf');
+    }
+
 }

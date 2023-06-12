@@ -13,15 +13,13 @@
 
     <div class="container">
 
-        @foreach ($saran as $item)
-        @endforeach
         @if (Session::has('message'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Berhasil: </strong> {{ Session::get('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Cloes">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berhasil: </strong> {{ Session::get('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Cloes">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
         <h3>Form Saran</h3>
         <form action="{{ route('saranStore') }}" method="post">
@@ -30,8 +28,41 @@
                 <label for="saran">Saran:</label>
                 <textarea class="form-control" name="saran" id="saran" rows="5" placeholder="Masukkan saran Anda"></textarea>
             </div>
+            @error('saran')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <input type="hidden" name="masyarakat_id" value="{{ Auth::guard('masyarakat')->user()->id }}">
-            <button type="submit" class="btn btn-primary m-5">Kirim</button>
+            <button type="submit" class="btn btn-primary mt-2 mb-3">Kirim</button>
         </form>
+
+        @if ($saran->count() < 1)
+            <h3 hidden>Saran Sebelumnya</h3>
+        @else
+            <h3>Saran Sebelumnya</h3>
+        @endif
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width: 85%">Saran</th>
+                    <th style="width: 15%">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($saran as $item)
+                <tr>
+                    <td>{{ $item->saran }}</td>
+                    <td>
+                        <form action="{{ route('saranDelete', $item->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <a href="{{ route('saranEdite', $item->id) }}" class="btn btn-success">Edit</a>
+                            <button class="btn btn-danger">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
     </div>
 @endsection

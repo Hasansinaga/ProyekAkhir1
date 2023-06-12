@@ -10,12 +10,6 @@
           Desa Pangombusan merupakan ibu kota dan pusat
           pemerintahan Kecamatan Parmaksian.
         </p>
-        <div class="d-flex justify-content-start mt-4">
-          <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
-          <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
-          <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
-          <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-instagram"></i></a>
-        </div>
       </div>
       <div class="col-md-4 mb-5">
         <h3 class="text-primary mb-4">Jam Kerja</h3>
@@ -31,23 +25,23 @@
       <div class="col-lg-3 col-md-6 mb-5">
         <h3 class="text-primary mb-4">Quick Links</h3>
         <div class="d-flex flex-column justify-content-start">
-          <a class="text-white mb-2" href="#"
+          <a class="text-white mb-2" href="/masyarakat/dashboard"
             ><i class="fa fa-angle-right mr-2"></i>Home</a
           >
-          <a class="text-white mb-2" href="#"
-            ><i class="fa fa-angle-right mr-2"></i>About Us</a
+          <a class="text-white mb-2" href="{{route('suratIndex')}}"
+            ><i class="fa fa-angle-right mr-2"></i>Request Surat Pengantar KTP</a
           >
-          <a class="text-white mb-2" href="#"
-            ><i class="fa fa-angle-right mr-2"></i>Our Classes</a
+          <a class="text-white mb-2" href="{{ route('saran')}}"
+            ><i class="fa fa-angle-right mr-2"></i>Mau Kasih Saran?</a
           >
-          <a class="text-white mb-2" href="#"
-            ><i class="fa fa-angle-right mr-2"></i>Our Teachers</a
+          <a class="text-white mb-2" href="{{ route('galery') }}"
+            ><i class="fa fa-angle-right mr-2"></i>Galery</a
           >
-          <a class="text-white mb-2" href="#"
-            ><i class="fa fa-angle-right mr-2"></i>Our Blog</a
+          <a class="text-white mb-2" href="{{ route('contact') }}"
+            ><i class="fa fa-angle-right mr-2"></i>Contact</a
           >
-          <a class="text-white" href="#"
-            ><i class="fa fa-angle-right mr-2"></i>Contact Us</a
+          <a class="text-white" href="{{ route('pengumuman') }}"
+            ><i class="fa fa-angle-right mr-2"></i>Pengumuman</a
           >
           <a class="text-white" href="{{url('masyarakat/logout')}}"
           ><i class="fa fa-angle-right mr-2"></i>logout</a

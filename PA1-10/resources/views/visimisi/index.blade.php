@@ -23,10 +23,10 @@
                         <td>{{ $item->visi }}</td>
                         <td>{!! Illuminate\Support\Str::limit(strip_tags($item->misi), 30) !!}</td>
                         <td>
-                            <form action="VisiMisi/{{$item->id}}" method="POST">
+                            <form action="{{route('visimisi.destroy', $item->id )}}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <a href="admin/VisiMisi/{{$item->id}}/edit" class="btn btn-success">Edit</a>
+                                <a href="/VisiMisi/{{$item->id}}/edit" class="btn btn-success">Edit</a>
                                 <button class="btn btn-danger">Hapus</button>
                             </form>
                         </td>

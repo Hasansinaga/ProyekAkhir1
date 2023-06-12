@@ -37,15 +37,23 @@
     <table class="table table-bordered table-striped" id="myTable" style="max-width: 100%;">
         <thead>
             <tr>
-                <th style="width: 25%">Nama</th>
+                <th style="width: 10%">Nama</th>
                 <th style="width: 60%">Saran</th>
+                <th style="width: 15%">Tanggal Update</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($saran as $key => $item)
                 <tr>
                     <td>{{ $item->masyarakat->name }}</td>
-                    <td class="text-wrap">{{ Illuminate\Support\Str::limit(strip_tags($item->saran)) }}</td>
+                    <td class="text-wrap">{{($item->saran)}}</td>
+                    <td>{{$item->updated_at}}</td>
+                    <td><form action="{{ route('saranDelete', $item->id) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button   class="btn btn-danger">Hapus</button>
+                   </form></td>
                 </tr>
             @empty
                 <tr>

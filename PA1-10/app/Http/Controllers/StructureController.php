@@ -30,6 +30,22 @@ class StructureController extends Controller
      */
     public function store(Request $request)
     {
+        $alert = [
+            'name' => 'required|string|max:255',
+            'jabatan' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg',
+        ];
+        $message = [
+            'name.required' => 'Kolom Nama Tidak Boleh Kosong',
+            'jabatan.required' => 'Jabatan Harus Di Pilih',
+            'address.required' => 'Alamat Harus Di Isi',
+            'email.required' => 'Email Harus Di Isi',
+            'image.required' => 'Image Harus Di Isi',
+            'image.mimes' => 'Harus Berupa JPG,PNG,JPEG',
+        ];
+        $this->validate($request, $alert, $message);
         $file = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images/structure'),$file);
 
@@ -38,7 +54,7 @@ class StructureController extends Controller
         $structure->name = $request->name;
         $structure->jabatan = $request->jabatan;
         $structure->address = $request->address;
-        $structure->mobile = $request->mobile;
+        $structure->email = $request->email;
         $structure->image = $file;
 
         $structure->save();
@@ -73,7 +89,8 @@ class StructureController extends Controller
             'name' => 'required',
             'jabatan' => 'required',
             'address' => 'required',
-            'mobile' => 'required',
+            'email' => 'required',
+            'image' => 'required',
         ]);
 
         $structure = Structure::find($id);
@@ -91,7 +108,7 @@ class StructureController extends Controller
         $structure->name = $request['name'];
         $structure->jabatan = $request['jabatan'];
         $structure->address = $request['address'];
-        $structure->mobile = $request['mobile'];
+        $structure->email = $request['email'];
         $structure->update();
 
         return to_route('structure.index')->with('succes', 'Data berhasil diubah');

@@ -1,19 +1,11 @@
 @extends('masyarakat.master')
 
-@section('title')
-@endsection
-
 @section('content')
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-        <title>Pengumuman</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f4f4f4;
-                padding: 20px;
+
             }
 
             .hero-section {
@@ -51,14 +43,10 @@
                 margin-bottom: 0;
             }
         </style>
-    </head>
-
-    <body>
 
         <div class="container-fluid bg-primary mb-5">
             <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
                 <h3 class="display-3 font-weight-bold text-white">Pengumuman</h3>
-
             </div>
         </div>
 
@@ -75,9 +63,21 @@
                 @endforeach
 
             </div>
+            <div class="text-right">
+                <ul class="pagination">
+                    @if ($pengumuman->previousPageUrl())
+                        <li class="page-item">
+                            <a href="{{ $pengumuman->previousPageUrl() }}" class="page-link">Previous</a>
+                        </li>
+                    @endif
+
+                    @if ($pengumuman->nextPageUrl())
+                        <li class="page-item">
+                            <a href="{{ $pengumuman->nextPageUrl() }}" class="page-link">Next</a>
+                        </li>
+                    @endif
+                </ul>
+            </div>
         </div>
 
-    </body>
-
-    </html>
 @endsection
