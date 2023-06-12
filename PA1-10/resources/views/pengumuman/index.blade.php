@@ -9,12 +9,33 @@
 @endpush
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
+
+        function deleteConfirmation(event) {
+            event.preventDefault();
+            const form = event.target.form;
+
+            Swal.fire({
+                title: 'Konfirmasi Hapus',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
     </script>
-    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
 @endpush
 
 @section('content')
@@ -40,14 +61,14 @@
                                 @csrf
                                 @method('delete')
                                 <a href="/pengumuman/{{ $item->id }}/edit" class="btn btn-success">Edit</a>
-                                <button class="btn btn-danger">Hapus</button>
+                                <button class="btn btn-danger" onclick="deleteConfirmation(event)">Hapus</button>
                             </form>
                         </td>
                     </tr>
                 @empty
-                <tr>
-                    <td>Data Tidak Ada</td>
-                </tr>
+                    <tr>
+                        <td>Data Tidak Ada</td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
@@ -56,5 +77,3 @@
         </a>
     </div>
 @endsection
-
-

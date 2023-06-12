@@ -38,8 +38,6 @@
         @if ($saran->count() < 1)
             <h3 hidden>Saran Sebelumnya</h3>
         @else
-            <h3>Saran Sebelumnya</h3>
-        @endif
         <table class="table">
             <thead>
                 <tr>
@@ -56,13 +54,14 @@
                             @csrf
                             @method('delete')
                             <a href="{{ route('saranEdite', $item->id) }}" class="btn btn-success">Edit</a>
-                            <button class="btn btn-danger">Hapus</button>
+                            <button class="btn btn-danger btn-delete">Hapus</button>
                         </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        @endif
 
     </div>
 @endsection

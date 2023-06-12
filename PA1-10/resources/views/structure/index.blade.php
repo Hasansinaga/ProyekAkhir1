@@ -6,6 +6,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <a href="{{ url('/structure/create') }}" class="btn btn-success mb-3" title="Add New Contact">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New
         </a>
@@ -15,7 +20,7 @@
                 <div class="card">
                     <h6>{{$item->jabatan}}</h6>
                     <br>
-                    <img src="{{ asset('images/structure/'.$item->image) }}" class="card-img-top" alt="..." height="150px">
+                    <img src="{{ asset('images/structure/'.$item->image) }}" class="card-img-top" alt="..." height="200px">
                     <div class="card-body">
                         <p class="card-text mt-1">Nama      : {{ $item->name }}</h1> <br>
                         <p class="card-text mt-1"> Alamat    :{{ $item->address }}</p>
@@ -24,7 +29,7 @@
                             @csrf
                             @method('delete')
                             <a href="{{ route('structure.edit', $item->id) }}" class="btn btn-success">Edit</a>
-                            <button class="btn btn-danger">Hapus</button>
+                            <button class="btn btn-danger btn-delete">Hapus</button>
                         </form>
                     </div>
                 </div>
@@ -36,3 +41,29 @@
         </a>
     </div>
 @endsection
+
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-delete').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: 'Apakah Anda yakin ingin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

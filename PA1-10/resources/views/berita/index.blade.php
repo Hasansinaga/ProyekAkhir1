@@ -9,9 +9,30 @@
 @endpush
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
+        });
+
+        // SweetAlert untuk konfirmasi penghapusan
+        $('form').on('submit', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
         });
     </script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
@@ -40,8 +61,7 @@
             <tbody>
                 @forelse ($news as $key => $item)
                     <tr>
-                        <td><img src="{{ asset('images/berita/' . $item->image) }}" alt="..." height="50px"
-                                width="50px"></td>
+                        <td><img src="{{ asset('images/berita/' . $item->image) }}" alt="..." height="50px" width="50px"></td>
                         <td>{{ $item->judul }}</td>
                         <td>{!! Illuminate\Support\Str::limit(strip_tags($item->isi), 30) !!}</td>
                         <td>

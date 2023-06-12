@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('title')
-Galery
+    Galery
 @endsection
 
 @push('css')
@@ -9,9 +9,30 @@ Galery
 @endpush
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
+        });
+
+        // SweetAlert untuk konfirmasi penghapusan
+        $('form').on('submit', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
         });
     </script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
@@ -32,6 +53,7 @@ Galery
                 <tr>
                     <th>Image</th>
                     <th>Nama Gambar</th>
+                    <th>Tanggal Update</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -40,6 +62,7 @@ Galery
                     <tr>
                         <td><img src="{{ asset('images/galery/'. $item->image) }}" alt="..." height="150px"></td>
                         <td>{{ $item->name }}</td>
+                        <td>{{ $item->updated_at}}</td>
                         <td>
                             <form action="{{ route('galery.destroy', $item->id) }}" method="POST">
                                 @csrf

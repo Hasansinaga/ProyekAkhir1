@@ -83,12 +83,12 @@ class FronController extends Controller
     public function saranStore(Request $request)
     {
         $alert = [
-            'saran' => 'required|max:400|min:30',
+            'saran' => 'required|max:400|min:20',
         ];
         $message = [
             'saran.required' => 'Silahkan isi saran Anda Terlebih Dahulu',
             'saran.max' => 'Saran Tidak boleh lebih dari 400 karakter',
-            'saran.min' => 'Saran Tidak boleh kurang Dari 30 Karakter'
+            'saran.min' => 'Saran Tidak boleh kurang Dari 20 Karakter'
         ];
         $this->validate($request, $alert, $message);
         $validatedData = $request->validate([

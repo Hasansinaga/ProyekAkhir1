@@ -10,6 +10,7 @@
 
 @push('js')
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({
@@ -26,6 +27,25 @@
                         previous: "Sebelumnya"
                     }
                 }
+            });
+
+            $('.btn-delete').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: 'Apakah Anda yakin ingin menghapus saran ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
         });
     </script>
@@ -47,13 +67,15 @@
             @forelse ($saran as $key => $item)
                 <tr>
                     <td>{{ $item->masyarakat->name }}</td>
-                    <td class="text-wrap">{{($item->saran)}}</td>
-                    <td>{{$item->updated_at}}</td>
-                    <td><form action="{{ route('saranDelete', $item->id) }}" method="POST">
-                        @csrf
-                        @method('delete')
-                        <button   class="btn btn-danger">Hapus</button>
-                   </form></td>
+                    <td class="text-wrap">{{ $item->saran }}</td>
+                    <td>{{ $item->updated_at }}</td>
+                    <td>
+                        <form action="{{ route('saranDelete', $item->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger btn-delete">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
