@@ -11,7 +11,7 @@
     </div>
     <div class="container">
         <p>Bagi Warga kami yang mau mengurus surat pengantar KTP melalui Sistem ini
-            Silahkan upload file Kartu Keluarga Anda.
+            Silahkan isi formulir dan upload file Kartu Keluarga Anda.
         </p>
         <form action="{{ route('suratStore') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -23,23 +23,22 @@
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="tempatlahir">Tempat Lahir</label>
-                    <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" required
-                        placeholder="Tempat Lahir">
-                </div>
-                @error('tempatlahir')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <div class="form-group col-md-6">
-                    <label for="tgllahir">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="tgllahir" name="tgllahir" required>
-                </div>
-                @error('tgllahir')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+            <div class="form-group">
+                <label for="tempatlahir">Tempat Lahir</label>
+                <input type="text" class="form-control" id="tempatlahir" name="tempatlahir" required
+                    placeholder="Tempat Lahir">
             </div>
+            @error('tempatlahir')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="form-group">
+                <label for="tgllahir">Tanggal Lahir</label>
+                <input type="date" class="form-control" id="tgllahir" name="tgllahir" required>
+            </div>
+            @error('tgllahir')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
                 <select class="form-control" id="jeniskelamin" name="jeniskelamin" required>
@@ -81,7 +80,7 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="form-group">
-                <label for="kk">File KK:</label>
+                <label for="kk">File KK: <span style="color: red">(harus berupa PDF)</span></label>
                 <input type="file" class="form-control-file" id="kk" name="kk" required>
             </div>
             @error('kk')

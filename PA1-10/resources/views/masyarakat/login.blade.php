@@ -8,21 +8,22 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background-image: url('/frontend/img/desa12.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         .container {
             max-width: 400px;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8); /* Ubah opasitas latar belakang */
             border-radius: 5px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
-
         .container h2 {
             text-align: center;
             color: #333;
@@ -71,38 +72,38 @@
 
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <h2>Login Masyarakat</h2>
 
         @if (Session::has('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{Session::get('error')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ Session::get('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
         @if (Session::has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{Session::get('success')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
-        <form action="{{url('masyarakat/login')}}" method="POST">
+        <form action="{{ url('masyarakat/login') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
                 @error('email')
-                <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
                 @error('password')
-                <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -110,7 +111,8 @@
 
         <hr>
 
-        <p>Belum memiliki akun? <a href="{{url('masyarakat/register')}}">Daftar disini</a></p>
+        <p>Belum memiliki akun? <a href="{{ url('masyarakat/register') }}">Daftar disini</a></p>
     </div>
 </body>
+
 </html>

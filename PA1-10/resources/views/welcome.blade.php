@@ -5,7 +5,9 @@
         <img class="man" src="{{ '/frontend/img/desa12.jpg' }}" alt=""
             style="height: 100vh; width:100%; object-fit: cover;">
         <h1 style="position: absolute; top: 20px; left: 20px; color: #fff;">Selamat Datang
+            @if (Auth::guard('masyarakat')->check())
             {{ Auth::guard('masyarakat')->user()->name }}</h1>
+            @endif
     </div>
 
     <div class="container-fluid pt-5">

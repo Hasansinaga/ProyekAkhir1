@@ -62,12 +62,9 @@ class NewsController extends Controller
     {
         $berita = News::findOrFail($id);
 
-        return view('masyarakat.berita.show', compact('berita'));
+        return view('berita.show', compact('berita'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $news = News::find($id);

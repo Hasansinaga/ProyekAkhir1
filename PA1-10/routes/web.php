@@ -25,19 +25,29 @@ use Illuminate\Support\Facades\Route;
 */
 // Route::get('/', [FrontendController::class, 'index']);
 
-Route::middleware(['guest'])->group(function(){
-    Route::get('/', [FronController::class, 'dashboard'])->name('home');
+Route::get('/', [FronController::class, 'dashboard'])->name('home');
 
-    Route::resource('berita', NewsController::class);
+Route::get('/dashboard', [FronController::class, 'dashboard']);
 
-    Route::resource('galery', GaleryController::class);
+Route::get('/galery', [FronController::class, 'galeri'])->name('galery');
 
-    Route::resource('structure', StructureController::class);
+Route::get('/structure', [FronController::class, 'structure'])->name('structure');
 
-    Route::resource('VisiMisi', VisimisiController::class);
+Route::get('/visimisi', [FronController::class, 'visimisi'])->name('visimisi');
 
-    Route::resource('pengumuman', PengumumanController::class);
-});
+Route::get('/pengumuman', [FronController::class, 'pengumuman'])->name('pengumuman');
+
+Route::get('/semuaBerita', [FronController::class, 'semuaBerita'])->name('semuaBerita');
+
+Route::get('/berita/{id}', [FronController::class, 'beritadetail'])->name('beritadetail');
+
+Route::get('/contact', [FronController::class, 'contact'])->name('contact');
+
+Route::get('/profilDesa', [FronController::class, 'profilDesa'])->name('profilDesa');
+
+Route::get('surat/index', [FronController::class, 'suratIndex'])->name('suratIndex');
+
+
 
 
 require __DIR__ . '/auth.php';
@@ -75,13 +85,13 @@ Route::prefix('admin')->namespace('App\Http\Controllers')->group(function () {
 
         Route::resource('masyarakat', 'MasyarakatController');
 
-        Route::get('saran',[DashboardController::class,'saran'])->name('admin.saran');
+        Route::get('saran', [DashboardController::class, 'saran'])->name('admin.saran');
 
-        Route::get('surat',[DashboardController::class,'surat'])->name('admin.surat');
+        Route::get('surat', [DashboardController::class, 'surat'])->name('admin.surat');
 
-        Route::get('surat/{id}',[DashboardController::class,'viewSurat'])->name('viewSurat');
+        Route::get('surat/{id}', [DashboardController::class, 'viewSurat'])->name('viewSurat');
 
-        Route::post('surat/{id}',[DashboardController::class, 'suratapprove'])->name('aprovesurat');
+        Route::post('surat/{id}', [DashboardController::class, 'suratapprove'])->name('aprovesurat');
 
     });
 });
@@ -89,48 +99,30 @@ Route::prefix('admin')->namespace('App\Http\Controllers')->group(function () {
 
 Route::prefix('masyarakat')->namespace('App\Http\Controllers')->group(function () {
     // route login
-    Route::match(['get', 'post'], 'login', 'MasyarakatController@login');
+    Route::match(['get', 'post'], 'login', 'MasyarakatController@login')->name('login');
 
     Route::match(['get', 'post'], 'register', 'MasyarakatController@register');
 
     Route::middleware(['Masyarakat'])->group(function () {
         Route::get('logout', 'MasyarakatController@logout');
 
-    Route::get('/dashboard', [FronController::class, 'dashboard']);
 
-    Route::get('/galery', [FronController::class, 'galeri'])->name('galery');
+        Route::get('saran', [FronController::class, 'saran'])->name('saran');
 
-    Route::get('/structure', [FronController::class, 'structure'])->name('structure');
+        Route::post('saran', [FronController::class, 'saranStore'])->name('saranStore');
 
-    Route::get('/visimisi', [FronController::class, 'visimisi'])->name('visimisi');
+        Route::delete('saran/{id}', [FronController::class, 'saranDelete'])->name('saranDelete');
 
-    Route::get('/pengumuman', [FronController::class, 'pengumuman'])->name('pengumuman');
+        Route::get('saran/{id}', [FronController::class, 'saranEdite'])->name('saranEdite');
 
-    Route::get('saran', [FronController::class, 'saran'])->name('saran');
+        Route::post('saran/{id}', [FronController::class, 'saranUpdate'])->name('saranUpdate');
 
-    Route::post('saran',[FronController::class, 'saranStore'])->name('saranStore');
+        Route::get('surat/all', [FronController::class, 'surat'])->name('surat.all');
 
-    Route::delete('saran/{id}', [FronController::class, 'saranDelete'])->name('saranDelete');
+        Route::get('cetakSurat/{id}', [FronController::class, 'cetak'])->name('cetak');
 
-    Route::get('saran/{id}', [FronController::class, 'saranEdite'])->name('saranEdite');
+        Route::post('surat/simpan', [FronController::class, 'suratStore'])->name('suratStore');
 
-    Route::post('saran/{id}',[FronController::class, 'saranUpdate'])->name('saranUpdate');
-
-    Route::get('surat/all', [FronController::class, 'surat'])->name('surat.all');
-
-    Route::get('surat/index', [FronController::class, 'suratIndex'])->name('suratIndex');
-
-    Route::get('cetakSurat/{id}', [FronController::class, 'cetak'])->name('cetak');
-
-    Route::post('surat/simpan',[FronController::class, 'suratStore'])->name('suratStore');
-
-    Route::get('/semuaBerita', [FronController::class, 'semuaBerita'])->name('semuaBerita');
-
-    Route::get('/berita/{id}', [FronController::class, 'beritadetail'])->name('beritadetail');
-
-    Route::get('/contact', [FronController::class, 'contact'])->name('contact');
-
-    Route::get('/profilDesa', [FronController::class, 'profilDesa'])->name('profilDesa');
 
     });
 

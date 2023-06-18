@@ -11,17 +11,17 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama Gambar</label>
-                    <textarea class="form-control @error('name') is-invalid @enderror" name="name" id="name" rows="3">{{ old('name') }}</textarea>
+                    <textarea class="form-control @error('name') is-invalid @enderror" name="name" id="name" required rows="3">{{ old('name') }}</textarea>
                     @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="image">Gambar</label>
-                    <input class="form-control-file @error('image') is-invalid @enderror" name="image" type="file" id="image">
+                    <input class="form-control" name="image" type="file" id="image">
                     @error('image')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <br>

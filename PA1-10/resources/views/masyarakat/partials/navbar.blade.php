@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav font-weight-bold ml-auto">
                 <li class="nav-item">
-                    <a href="/masyarakat/dashboard" class="nav-link">Home</a>
+                    <a href="/dashboard" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tentang Desa</a>
@@ -38,6 +38,8 @@
                 <li class="nav-item">
                     <a href="{{ route('pengumuman') }}" class="nav-link">Pengumuman</a>
                 </li>
+
+                @if (Auth::guard('masyarakat')->check())
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-user"></i>
@@ -46,6 +48,12 @@
                         <a href="{{url('masyarakat/logout')}}" class="dropdown-item">logout</a>
                     </div>
                 </li>
+                @else
+                <li class="nav-item">
+                    <a href="{{route('login')}}" class="nav-link">Login</a>
+                </li>
+                @endif
+
             </ul>
         </div>
     </nav>

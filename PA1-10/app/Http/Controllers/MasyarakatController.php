@@ -78,7 +78,7 @@ class MasyarakatController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('masyarakat')->logout();
-        return redirect('masyarakat/login');
+        return redirect('/dashboard');
     }
 
     public function galery()
@@ -87,5 +87,5 @@ class MasyarakatController extends Controller
 
         return view('masyarakat.galery', compact('galery'));
     }
-    
+
 }

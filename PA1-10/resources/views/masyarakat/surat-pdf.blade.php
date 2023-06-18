@@ -1,6 +1,7 @@
 @php
     $formattedId = str_pad($data->id, 3, '0', STR_PAD_LEFT);
     $tahun = date('Y', strtotime($data->created_at));
+    setlocale(LC_TIME, 'id_ID');
 @endphp
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -48,7 +49,8 @@
                     <tr class="table-row">
                         <td>Tempat / Tanggal Lahir</td>
                         <td class="separator">:</td>
-                        <td>{{ $data->tempatlahir }} / {{ $data->tgllahir }}</td>
+                        <td>{{ $data->tempatlahir }} / {{ date('d F Y', strtotime($data->tgllahir)) }}</td>
+                    </td>
                     </tr>
                     <tr class="table-row">
                         <td>Alamat</td>

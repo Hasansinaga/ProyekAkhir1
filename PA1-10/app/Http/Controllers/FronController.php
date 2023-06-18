@@ -21,10 +21,6 @@ class FronController extends Controller
 
         $news = News::orderBy('created_at', 'desc')->take(6)
             ->get();
-        if (!Auth::guard('masyarakat')->check() && !Auth::guard('admin')->check()) {
-            return redirect('masyarakat/login');
-        }
-
         return view('welcome', compact('news'));
     }
 
@@ -76,7 +72,7 @@ class FronController extends Controller
     public function saran()
     {
         $masyarakat = Auth::guard('masyarakat')->id();
-        $saran = Saran::where('masyarakat_id', $masyarakat)->get();
+        $saran = Saran::where('masyarakat_id', $masyarakat)->paginate(5);
         return view('masyarakat.saran', compact('saran'));
     }
 
@@ -132,7 +128,7 @@ class FronController extends Controller
 
     public function surat()
     {
-        $surat = Surat::get();
+        $surat = Surat::orderBy('created_at', 'desc')->paginate(2);
 
         return view('masyarakat.surat', compact('surat'));
     }
@@ -159,6 +155,7 @@ class FronController extends Controller
             'kk.required' => 'Silahkan Upload file KK anda',
             'kk.mimes' => 'File KK harus berupa PDF',
             'name.required'=> 'Silahkan Isi kolom nama',
+            'name.string' => 'Nama Harus brupa Huruf',
             'tempatlahir.required' => 'Silahkan Isi kolom Tempat Lahir',
             'tgllahir.required' => 'Silahkan Isi kolom Tanggal Lahir',
             'jeniskelamin.required' => 'Silahkan Isi kolom Jenis Kelamin',

@@ -54,36 +54,38 @@
 @section('content')
 
 <div class="container">
-    <table class="table table-bordered table-striped" id="myTable" style="max-width: 100%;">
-        <thead>
-            <tr>
-                <th style="width: 10%">Nama</th>
-                <th style="width: 60%">Saran</th>
-                <th style="width: 15%">Tanggal Update</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($saran as $key => $item)
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="myTable">
+            <thead>
                 <tr>
-                    <td>{{ $item->masyarakat->name }}</td>
-                    <td class="text-wrap">{{ $item->saran }}</td>
-                    <td>{{ $item->updated_at }}</td>
-                    <td>
-                        <form action="{{ route('saranDelete', $item->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger btn-delete">Hapus</button>
-                        </form>
-                    </td>
+                    <th style="width: 10%">Nama</th>
+                    <th style="width: 60%">Saran</th>
+                    <th style="width: 15%">Tanggal Update</th>
+                    <th style="width: 15%">Aksi</th>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="2">Data Tidak Ada</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse ($saran as $key => $item)
+                    <tr>
+                        <td>{{ $item->masyarakat->name }}</td>
+                        <td class="text-wrap">{{ $item->saran }}</td>
+                        <td>{{ $item->updated_at }}</td>
+                        <td>
+                            <form action="{{ route('saranDelete', $item->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-delete">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4">Data Tidak Ada</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @endsection
